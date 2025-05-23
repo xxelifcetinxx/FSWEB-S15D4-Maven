@@ -22,3 +22,22 @@ public class Main {
 
         return cleaned.equals(reversed.toString());
     }
+
+    // Ondalık sayıyı ikili tabana çevirme
+    public static String convertDecimalToBinary(int number) {
+        if (number == 0) return "0";
+
+        Stack<Integer> stack = new Stack<>();
+        while (number > 0) {
+            stack.push(number % 2);
+            number /= 2;
+        }
+
+        StringBuilder binary = new StringBuilder();
+        while (!stack.isEmpty()) {
+            binary.append(stack.pop());
+        }
+
+        return binary.toString();
+    }
+}
