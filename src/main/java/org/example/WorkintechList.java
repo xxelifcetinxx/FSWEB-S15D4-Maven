@@ -33,8 +33,10 @@ public class WorkintechList<T extends Comparable<T>> extends ArrayList<T> {
         Collections.sort(this);
     }
 
-    public void remove(Object o) {
-        super.remove(o);
+    @Override
+    public boolean remove(Object o) {
+        boolean result = super.remove(o);
         this.sort();
+        return result;
     }
 }
