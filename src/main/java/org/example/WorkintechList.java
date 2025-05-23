@@ -3,40 +3,24 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class WorkintechList<T extends Comparable<T>> extends ArrayList<T> {
+public class WorkintechList extends ArrayList<Object> {
 
     @Override
-    public boolean add(T element) {
-        if (!this.contains(element)) {
-            return super.add(element);
+    public boolean add(Object o) {
+        if (!this.contains(o)) {
+            return super.add(o);
         }
         return false;
     }
 
     @Override
-    public void add(int index, T element) {
-        if (!this.contains(element)) {
-            super.add(index, element);
-        }
-    }
-
-    @Override
-    public boolean addAll(java.util.Collection<? extends T> c) {
-        boolean added = false;
-        for (T element : c) {
-            added |= this.add(element);
-        }
-        return added;
+    public boolean remove(Object o) {
+        boolean removed = super.remove(o);
+        sort(); // her silmeden sonra otomatik sırala
+        return removed;
     }
 
     public void sort() {
-        Collections.sort(this);
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        boolean result = super.remove(o);
-        this.sort();
-        return result;
+        Collections.sort((ArrayList) this);
     }
 }

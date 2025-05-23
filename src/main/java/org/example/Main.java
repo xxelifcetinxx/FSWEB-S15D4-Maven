@@ -1,41 +1,38 @@
 package org.example;
 
-import java.util.Stack;
-
 public class Main {
 
-    // Palindrom kontrolü (noktalama, boşluk ve büyük-küçük harf duyarsız)
+    public static void main(String[] args) {
+        // test etmek istersen buraya çağrılar yazabilirsin
+    }
+
+    // Palindrom kontrolü
     public static boolean checkForPalindrome(String input) {
         if (input == null) return false;
 
-        String cleaned = input.replaceAll("[\\W_]", "").toLowerCase();  // harf ve sayı dışı karakterleri çıkar
-
-        Stack<Character> stack = new Stack<>();
-        for (char c : cleaned.toCharArray()) {
-            stack.push(c);
+        // Tüm karakterleri küçük harfe çevirip sadece harf ve rakamları tut
+        StringBuilder cleaned = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (Character.isLetterOrDigit(c)) {
+                cleaned.append(Character.toLowerCase(c));
+            }
         }
 
-        StringBuilder reversed = new StringBuilder();
-        while (!stack.isEmpty()) {
-            reversed.append(stack.pop());
-        }
+        // Tersini oluştur
+        String cleanedStr = cleaned.toString();
+        String reversedStr = cleaned.reverse().toString();
 
-        return cleaned.equals(reversed.toString());
+        return cleanedStr.equals(reversedStr);
     }
 
-    // Ondalık sayıyı ikili tabana çevirme
+    // Decimal to Binary
     public static String convertDecimalToBinary(int number) {
         if (number == 0) return "0";
 
-        Stack<Integer> stack = new Stack<>();
-        while (number > 0) {
-            stack.push(number % 2);
-            number /= 2;
-        }
-
         StringBuilder binary = new StringBuilder();
-        while (!stack.isEmpty()) {
-            binary.append(stack.pop());
+        while (number > 0) {
+            binary.insert(0, number % 2);
+            number = number / 2;
         }
 
         return binary.toString();
